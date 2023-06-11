@@ -1,6 +1,9 @@
 import { MongoClient } from "mongodb";
 import express from "express";
+import cors from "cors";
+
 const app = express();
+app.use(cors());
 
 async function addrecord(req, res) {
   const uri = "mongodb://127.0.0.1:27017";
@@ -10,7 +13,7 @@ async function addrecord(req, res) {
   const messageColl = db.collection("message");
 
   let inputDoc = {
-    message: req.query.message || "BackEnd",
+    message: req.query.message || "default",
   };
   await messageColl.insertOne(inputDoc);
 
