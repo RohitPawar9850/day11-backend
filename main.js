@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 
 const app = express();
-app.use(cors());
+app.use(cors()); // allowing everyone.
 
 async function addrecord(req, res) {
   const uri = "mongodb://127.0.0.1:27017";
@@ -39,9 +39,15 @@ async function findAllMessage(req, res) {
   res.json(list);
 }
 
+function helloPost(req, res) {
+  let result = { opr: true };
+  res.json(result);
+}
+
 // http://localhost:4000/addrecord
 app.get("/addrecord", addrecord);
 app.get("/findAll", findAllMessage);
+app.post("/hello", helloPost);
 
 // http://localhost:4000/
 app.listen(4000);
